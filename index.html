@@ -1,0 +1,3050 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم بوابة دمشق - المنيو الشامل بالصور والأسعار</title>
+    <meta name="description" content="مطعم بوابة دمشق في دسوق - أشهى المأكولات السورية الأصيلة، شاورما وصواني ومشاوي طازجة، اطلب أونلاين توصيل سريع أو استلام من المطعم.">
+    <meta property="og:title" content="مطعم بوابة دمشق - المنيو الشامل">
+    <meta property="og:description" content="أصالة المذاق الشامي في دسوق - اطلب شاورما ومشاوي وصواني طازجة أونلاين بضغطة زر.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:type" content="restaurant.menu">
+    <meta name="theme-color" content="#e07a00">
+    <!-- خط كايو الأنيق -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold-light: #ffe29a;
+            --gold: #ffb703;
+            --gold-deep: #e07a00;
+            --wine: #7a1f1f;
+            --wine-deep: #3a0f0f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        html, body {
+            cursor: none;
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            html, body {
+                cursor: auto;
+            }
+        }
+
+        body {
+            background: #fdfbf7;
+            color: #2b2b2b;
+        }
+
+        /* المؤشر المضيء المتحرك خلف الماوس - لون نيون متباين مع هوية الموقع الذهبية */
+        .cursor-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.55) 0%, rgba(168, 85, 247, 0.45) 55%, rgba(168, 85, 247, 0) 78%);
+            border: 2px solid rgba(0, 229, 255, 0.85);
+            box-shadow: 0 0 18px rgba(0, 229, 255, 0.7), 0 0 34px rgba(168, 85, 247, 0.5);
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+            opacity: 0;
+            will-change: transform;
+        }
+
+        .cursor-glow.active {
+            opacity: 1;
+        }
+
+        .cursor-glow.hovering {
+            width: 60px;
+            height: 60px;
+            border-color: rgba(255, 20, 147, 0.9);
+            background: radial-gradient(circle, rgba(255, 20, 147, 0.5) 0%, rgba(0, 229, 255, 0.4) 55%, rgba(0, 229, 255, 0) 78%);
+            box-shadow: 0 0 24px rgba(255, 20, 147, 0.8), 0 0 44px rgba(0, 229, 255, 0.55);
+        }
+
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00e5ff;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.9);
+            pointer-events: none;
+            z-index: 99998;
+            opacity: 0.8;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+
+        /* ذيل المذنب - نقاط متتالية بتتلاشى ورا المؤشر */
+        .cursor-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00e5ff, #a855f7);
+            pointer-events: none;
+            z-index: 99997;
+            transform: translate(-50%, -50%);
+            will-change: transform, opacity, width, height;
+        }
+
+        /* شرارات الانفجار عند الضغط بالماوس */
+        .click-spark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ffb703;
+            pointer-events: none;
+            z-index: 99996;
+            transform: translate(-50%, -50%);
+            animation: sparkFly 0.65s ease-out forwards;
+        }
+
+        @keyframes sparkFly {
+            to {
+                transform: translate(calc(-50% + var(--sx)), calc(-50% + var(--sy))) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            .cursor-glow, .cursor-dot, .cursor-trail, .click-spark { display: none; }
+        }
+
+        /* عناصر بتاعت تفاعل ثلاثي الأبعاد مع الماوس */
+        .tilt-3d {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+        }
+
+        /* شريط التنقل الاحترافي */
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 7%;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #e07a00;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            position: relative;
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 600;
+            transition: color 0.3s, background 0.3s;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 16px;
+            left: 16px;
+            height: 2px;
+            background: #e07a00;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #e07a00;
+            background: #fff5eb;
+        }
+
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        .phone-chip {
+            background: #25d366;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* نظام التبويبات للصفحات داخل الملف الواحد */
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active-page {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* قسم الهيرو بخلفية واضحة */
+        .hero-section {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 7%;
+            background: linear-gradient(120deg, rgba(89, 33, 0, 0.75), rgba(15, 13, 11, 0.72)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e07a00;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), #fff3d6, var(--gold-deep), var(--gold-light));
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(2px 3px 10px rgba(0,0,0,0.55));
+            animation: goldShine 5s linear infinite;
+        }
+
+        @keyframes goldShine {
+            to { background-position: 300% center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-content h1 { animation: none; }
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #f1f5f9;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .primary-btn {
+            background: linear-gradient(120deg, var(--gold-light), var(--gold), var(--gold-deep), var(--gold));
+            background-size: 250% 250%;
+            color: #1a1200;
+            animation: shimmerBtn 4s ease infinite;
+            box-shadow: 0 6px 18px rgba(224,122,0,0.35);
+        }
+
+        .primary-btn:hover {
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(224,122,0,0.55);
+            transform: translateY(-2px);
+        }
+
+        @keyframes shimmerBtn {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .secondary-btn {
+            background: #25d366;
+            color: #fff;
+        }
+
+        .secondary-btn:hover {
+            background: #1ebc59;
+        }
+
+        /* كارت أنيميشن عالي الوضوح */
+        .hero-animation-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-animation-container::before {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            background: radial-gradient(circle, rgba(255, 183, 3, 0.45) 0%, rgba(255, 183, 3, 0) 70%);
+            animation: glowPulse 3.5s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .floating-food-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: floatAnimation 4.5s ease-in-out infinite;
+        }
+
+        .floating-food-card img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .food-badge {
+            margin-top: 12px;
+            font-weight: 800;
+            color: #e07a00;
+            font-size: 18px;
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(-1.5deg); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.6; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .floating-food-card, .hero-animation-container::before {
+                animation: none;
+            }
+        }
+
+        /* ترويسة الصفحات الداخلية بخلفية صور أكل */
+        .page-header {
+            position: relative;
+            text-align: center;
+            padding: 70px 20px;
+            background: linear-gradient(rgba(30, 15, 5, 0.72), rgba(30, 15, 5, 0.72)), var(--header-bg) no-repeat center center/cover;
+            border-bottom: 3px solid #ffb703;
+        }
+
+        #menu .page-header {
+            --header-bg: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        #about .page-header {
+            --header-bg: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        #contact .page-header {
+            --header-bg: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        .page-header h1 {
+            font-size: 38px;
+            font-weight: 900;
+            color: #ffb703;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+        }
+
+        .page-header p {
+            color: #f3e9dd;
+            font-size: 16px;
+        }
+
+        /* شبكة المنيو */
+        .container {
+            width: 88%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-section-full {
+            padding: 10px 0 80px;
+        }
+
+        .category-hint {
+            text-align: center;
+            color: #9a6a2f;
+            font-weight: 700;
+            margin: 20px 0 25px;
+            font-size: 15px;
+        }
+
+        .category-hint i {
+            color: #e07a00;
+            margin-left: 6px;
+        }
+
+        /* شبكة أقسام المنيو - كل قسم كارت واحد بصورة واحدة فقط */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .category-cover {
+            position: relative;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 220px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .category-cover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(224, 122, 0, 0.28);
+        }
+
+        .category-cover:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-cover-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            text-align: right;
+            padding: 18px;
+            background: linear-gradient(to top, rgba(20, 10, 2, 0.92) 10%, rgba(20, 10, 2, 0.15) 65%, rgba(20, 10, 2, 0) 100%);
+            color: #fff;
+        }
+
+        .category-cover-overlay h3 {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .category-cover-overlay p {
+            font-size: 13px;
+            color: #f0e3d2;
+            margin-bottom: 8px;
+        }
+
+        .category-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 183, 3, 0.95);
+            color: #1a1614;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-cover[aria-expanded="true"] .category-count {
+            background: #25d366;
+            color: #fff;
+        }
+
+        .category-cover[aria-expanded="true"] .category-count i {
+            transform: rotate(180deg);
+        }
+
+        .category-count i {
+            transition: transform 0.3s ease;
+        }
+
+        .category-cover[aria-expanded="true"] {
+            box-shadow: 0 0 0 3px #ffb703, 0 16px 35px rgba(224, 122, 0, 0.3);
+        }
+
+        /* لوحة الأصناف القابلة للفتح (أكورديون) */
+        .category-panel {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            scroll-margin-top: 90px;
+        }
+
+        .category-panel.open {
+            grid-template-rows: 1fr;
+            margin-top: 22px;
+        }
+
+        .category-panel-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .items-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 14px;
+            background: #fff8ef;
+            border: 1px solid #fae1cd;
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .item-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #fff;
+            border-radius: 14px;
+            padding: 12px 14px;
+            border: 1px solid #f3e4d0;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .category-panel.open .item-row {
+            animation: itemIn 0.4s ease forwards;
+        }
+
+        /* عناصر نتائج البحث تظهر فوراً بدون انتظار فتح الأكورديون */
+        .search-result-list .item-row {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .item-row:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(224, 122, 0, 0.15);
+        }
+
+        @keyframes itemIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .item-icon {
+            flex-shrink: 0;
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-info h4 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 3px;
+        }
+
+        .item-info p {
+            font-size: 13px;
+            font-weight: 800;
+            color: #e07a00;
+            line-height: 1.4;
+        }
+
+        .item-row .order-btn {
+            padding: 7px 12px;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-row {
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: 900;
+            color: #e07a00;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .order-btn {
+            background: #25d366;
+            color: #fff;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.25);
+        }
+
+        .order-btn:hover {
+            background: #1ebc59;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        .order-btn:active {
+            transform: translateY(0) scale(0.97);
+        }
+
+        /* قسم عروض وكومبوهات */
+        .offer-banner {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            background: linear-gradient(100deg, #e07a00, #ff9d2e);
+            border-radius: 22px;
+            padding: 22px 26px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 30px rgba(224, 122, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 90% 10%, rgba(255,255,255,0.25), transparent 60%);
+            pointer-events: none;
+        }
+
+        .offer-badge {
+            background: #1a1614;
+            color: #ffb703;
+            font-weight: 900;
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .offer-content {
+            flex: 1;
+            min-width: 200px;
+            color: #fff;
+        }
+
+        .offer-content h3 {
+            font-size: 21px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .offer-content p {
+            font-size: 14px;
+            color: #fff3e0;
+        }
+
+        .offer-price {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .offer-price .old-price {
+            text-decoration: line-through;
+            font-size: 13px;
+            opacity: 0.75;
+        }
+
+        .offer-price .new-price {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .offer-banner .order-btn {
+            flex-shrink: 0;
+        }
+
+        /* خانة البحث السريع */
+        .search-wrap {
+            position: relative;
+            max-width: 420px;
+            margin: 0 auto 26px;
+        }
+
+        .search-wrap i {
+            position: absolute;
+            top: 50%;
+            right: 18px;
+            transform: translateY(-50%);
+            color: #e07a00;
+            font-size: 16px;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 13px 45px 13px 16px;
+            border-radius: 30px;
+            border: 2px solid #fae1cd;
+            background: #fff;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            color: #2b2b2b;
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .search-wrap input:focus {
+            border-color: #e07a00;
+            box-shadow: 0 0 0 4px rgba(224, 122, 0, 0.12);
+        }
+
+        #searchResultsContainer {
+            margin-top: 4px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9a6a2f;
+            font-weight: 700;
+        }
+
+        /* نافذة بيانات التوصيل عند الطلب */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 12, 4, 0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #fff;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 20px;
+            padding: 28px 24px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            text-align: right;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: #fff5eb;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            color: #e07a00;
+            cursor: pointer;
+        }
+
+        .modal-box h3 {
+            color: #e07a00;
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .modal-item-info {
+            background: #fff8ef;
+            border: 1px solid #fae1cd;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 18px;
+        }
+
+        .modal-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #4b5563;
+            margin: 12px 0 6px;
+        }
+
+        .modal-box input,
+        .modal-box textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 10px;
+            border: 1.5px solid #e5e7eb;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .modal-box input:focus,
+        .modal-box textarea:focus {
+            border-color: #e07a00;
+        }
+
+        .modal-box textarea {
+            min-height: 70px;
+        }
+
+        .modal-submit-btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 13px;
+            font-size: 15px;
+        }
+
+        .modal-hint {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        /* زرار السلة العائم */
+        .cart-fab {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: #25d366;
+            color: #fff;
+            border: none;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
+            cursor: pointer;
+            z-index: 1500;
+            transition: transform 0.2s ease;
+        }
+
+        .cart-fab:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e02424;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            border: 2px solid #fff;
+        }
+
+        /* صفوف عناصر السلة */
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3e4d0;
+        }
+
+        .cart-item-row:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-info h4 {
+            font-size: 14px;
+            font-weight: 800;
+            color: #1f2937;
+        }
+
+        .cart-item-info p {
+            font-size: 12px;
+            color: #e07a00;
+            font-weight: 700;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff8ef;
+            border: 1px solid #fae1cd;
+            border-radius: 20px;
+            padding: 4px 10px;
+        }
+
+        .cart-item-qty button {
+            background: none;
+            border: none;
+            color: #e07a00;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            width: 20px;
+        }
+
+        .cart-item-qty span {
+            font-weight: 800;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .cart-remove-btn {
+            background: none;
+            border: none;
+            color: #d84315;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        /* أزرار اختيار نوع الطلب (توصيل / داخل المطعم) */
+        .order-type-toggle {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .order-type-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1.5px solid #e5e7eb;
+            background: #fff;
+            color: #4b5563;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .order-type-btn.active {
+            background: #fff5eb;
+            border-color: #e07a00;
+            color: #e07a00;
+        }
+
+        /* رابط لوحة الإدارة في الفوتر */
+        .admin-link-btn {
+            margin-top: 12px;
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-size: 12px;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .admin-link-btn:hover {
+            opacity: 1;
+            color: #ffb703;
+        }
+
+        .admin-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #4b5563;
+            margin-top: 14px;
+        }
+
+        /* تنبيه صغير عند إضافة صنف للسلة */
+        .cart-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: #1a1614;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 2500;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .cart-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media(max-width: 768px) {
+            .cart-fab {
+                bottom: 18px;
+                left: 18px;
+                width: 52px;
+                height: 52px;
+            }
+        }
+
+        /* صفحة عن المطعم وتواصل معنا */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            padding: 80px 0;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 32px;
+            color: #e07a00;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .c-card {
+            background: #fff;
+            padding: 40px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border-top: 5px solid #e07a00;
+        }
+
+        .c-card i {
+            font-size: 40px;
+            color: #e07a00;
+            margin-bottom: 15px;
+        }
+
+        .c-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .c-card p a {
+            color: #25d366;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* قسم إحصائيات الثقة - يزود مصداقية الموقع أمام العملاء */
+        .trust-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            background: linear-gradient(120deg, var(--wine-deep), var(--wine));
+            border-radius: 22px;
+            padding: 40px 25px;
+            margin-top: 50px;
+            box-shadow: 0 15px 35px rgba(58, 15, 15, 0.35);
+        }
+
+        .trust-stat {
+            text-align: center;
+            color: #fff;
+        }
+
+        .trust-stat .num {
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .trust-stat .label {
+            font-size: 14px;
+            color: #f3e9dd;
+            font-weight: 600;
+        }
+
+        /* شارة "الأكثر طلباً" على الأصناف المميزة */
+        .item-row {
+            position: relative;
+        }
+
+        .best-seller-tag {
+            position: absolute;
+            top: -8px;
+            right: 10px;
+            background: linear-gradient(120deg, var(--gold), var(--gold-deep));
+            color: #1a1200;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 3px 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(224,122,0,0.4);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* أنيميشن ظهور تدريجي عند التمرير */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* الفوتر */
+        footer {
+            background: #1a1614;
+            color: #9ca3af;
+            text-align: center;
+            padding: 35px 20px;
+            font-size: 14px;
+            border-top: 4px solid #ffb703;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* استجابة الموبايل */
+        @media(max-width: 768px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+            .hero-content h1 {
+                font-size: 38px;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .nav-links {
+                display: none;
+            }
+            .offer-banner {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- المؤشر المضيء المتحرك (تأثير خطير للماوس) -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- شريط التنقل الموحد -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-utensils"></i> بوابة دمشق
+        </div>
+        <nav class="nav-links">
+            <a onclick="switchPage('home', this)" class="active">الرئيسية</a>
+            <a onclick="switchPage('menu', this)">المنيو الشامل</a>
+            <a onclick="switchPage('about', this)">عن المطعم</a>
+            <a onclick="switchPage('contact', this)">تواصل معنا</a>
+        </nav>
+        <div class="header-contact">
+            <a href="tel:0472559855" class="phone-chip"><i class="fa-solid fa-phone"></i> 0472559855</a>
+        </div>
+    </header>
+
+    <!-- ================= 1. صفحة الرئيسية ================= -->
+    <div id="home" class="page-content active-page">
+        <section class="hero-section">
+            <div class="hero-content">
+                <span class="badge"><i class="fa-solid fa-star"></i> أصالة المذاق الشامي في دسوق</span>
+                <h1>مطعم بوابة دمشق</h1>
+                <p>استمتع بألذ المأكولات السورية الأصلية، الشاورما المحضرة على الفحم، والمشاوي الطازجة والصواني العريقة وسط أجواء ساحرة.</p>
+                <div class="hero-buttons">
+                    <button class="btn primary-btn" onclick="switchPage('menu', document.querySelectorAll('.nav-links a')[1])"><i class="fa-solid fa-book-open"></i> استعرض المنيو الشامل</button>
+                    <a href="https://wa.me/201015007894" target="_blank" class="btn secondary-btn"><i class="fa-brands fa-whatsapp"></i> اطلب الآن (واتساب)</a>
+                </div>
+            </div>
+            <div class="hero-animation-container">
+                <div class="floating-food-card tilt-3d">
+                    <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=500&q=80" alt="شاورما سوري">
+                    <div class="food-badge">شاورما ملكية طازجة 🔥</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- مميزات المطعم -->
+        <section class="container reveal-on-scroll" style="padding: 60px 0; text-align: center;">
+            <h2 style="font-size: 32px; color: #e07a00; margin-bottom: 40px; font-weight: 900;">لماذا يختارنا عشاق الأكل السوري؟</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <div class="c-card tilt-3d"><i class="fa-solid fa-fire-burner"></i><h3>لحوم ودواجن بلدي 100%</h3><p>نحرص على تقديم أجود أنواع اللحوم الطازجة يومياً.</p></div>
+                <div class="c-card tilt-3d"><i class="fa-solid fa-pepper-hot"></i><h3>خلطات دمشقية سرية</h3><p>وصفات عريقة متوارثة تناسب كل الأذواق الرفيعة.</p></div>
+                <div class="c-card tilt-3d"><i class="fa-solid fa-bolt"></i><h3>توصيل سريع وساخن</h3><p>نصلك أينما كنت في دسوق بنفس الجودة المذهلة.</p></div>
+            </div>
+
+            <!-- قسم إحصائيات الثقة - إضافة بتزود مصداقية المطعم أمام العملاء -->
+            <div class="trust-stats">
+                <div class="trust-stat"><span class="num">+5000</span><span class="label">عميل راضٍ</span></div>
+                <div class="trust-stat"><span class="num">10+</span><span class="label">سنوات خبرة</span></div>
+                <div class="trust-stat"><span class="num">30</span><span class="label">دقيقة متوسط التوصيل</span></div>
+                <div class="trust-stat"><span class="num">4.9★</span><span class="label">تقييم العملاء</span></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= 2. صفحة المنيو الشامل (بكل الأصناف والأسعار والصور) ================= -->
+    <div id="menu" class="page-content">
+        <div class="page-header">
+            <h1>قائمة الطعام الكاملة</h1>
+            <p>اختر وجبتك المفضلة واطلبها بضغطة زر واحدة لتصلك مباشرة</p>
+        </div>
+
+        <section class="menu-section-full container">
+
+            <!-- عرض اليوم / الكومبو المميز - يتحكم فيه الأدمن من لوحة الإدارة -->
+            <div class="offer-banner tilt-3d" id="offerBanner">
+                <span class="offer-badge"><i class="fa-solid fa-bolt"></i> <span id="offerBadgeText">عرض اليوم</span></span>
+                <div class="offer-content">
+                    <h3 id="offerTitleText">كومبو العيلة الموفر</h3>
+                    <p id="offerDescText">2 سندوتش شاورما دجاج كبير + بطاطس + مشروب</p>
+                </div>
+                <div class="offer-price">
+                    <span class="old-price" id="offerOldPriceText">150 جنيه</span>
+                    <span class="new-price" id="offerNewPriceText">99 جنيه</span>
+                </div>
+                <button class="order-btn" id="offerAddBtn" onclick="addToCart('كومبو العيلة الموفر (عرض اليوم)', '99 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف العرض للسلة</button>
+            </div>
+
+            <!-- خانة البحث السريع -->
+            <div class="search-wrap">
+                <input type="text" id="menuSearchInput" placeholder="دور على صنف... مثلاً: بيتزا" oninput="filterMenu(this.value)">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <p class="category-hint"><i class="fa-solid fa-hand-pointer"></i> اضغط على أي قسم لعرض كل أصنافه</p>
+            <div class="category-grid">
+            <button class="category-cover tilt-3d" data-target="trays" onclick="toggleCategory('trays')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80" alt="الصواني والعروض" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>الصواني والعروض</h3>
+                    <p>تشكيلة غنية تكفي المجموعة</p>
+                    <span class="category-count">9 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="grills" onclick="toggleCategory('grills')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80" alt="المشويات" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>المشويات</h3>
+                    <p>مشويات طازجة على الفحم</p>
+                    <span class="category-count">9 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="meals" onclick="toggleCategory('meals')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=700&q=80" alt="الوجبات" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>الوجبات</h3>
+                    <p>وجبات متكاملة بالأرز والمقبلات</p>
+                    <span class="category-count">17 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="shawarma" onclick="toggleCategory('shawarma')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=700&q=80" alt="الشاورما والبوكسات" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>الشاورما والبوكسات</h3>
+                    <p>شاورما دجاج طازجة يومياً</p>
+                    <span class="category-count">9 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="sandwiches" onclick="toggleCategory('sandwiches')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=700&q=80" alt="السندوتشات والحواوشي" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>السندوتشات والحواوشي</h3>
+                    <p>سندوتشات طازجة وحواوشي بلدي</p>
+                    <span class="category-count">10 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="crepe" onclick="toggleCategory('crepe')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=700&q=80" alt="الكريب الحادق" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>الكريب الحادق</h3>
+                    <p>كريب حادق مقرمش من الخارج</p>
+                    <span class="category-count">12 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="pizza" onclick="toggleCategory('pizza')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1597715469889-dd75fe4a1765?auto=format&fit=crop&w=700&q=80" alt="البيتزا والفطائر" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>البيتزا والفطائر</h3>
+                    <p>بيتزا وفطائر مخبوزة طازجة</p>
+                    <span class="category-count">22 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="manakish" onclick="toggleCategory('manakish')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=700&q=80" alt="المناقيش والمقبلات" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>المناقيش والمقبلات</h3>
+                    <p>مخبوزات ومقبلات على أصولها</p>
+                    <span class="category-count">23 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            <button class="category-cover tilt-3d" data-target="drinks" onclick="toggleCategory('drinks')" aria-expanded="false">
+                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=700&q=80" alt="المشروبات" loading="lazy">
+                <div class="category-cover-overlay">
+                    <h3>المشروبات</h3>
+                    <p>مشروبات باردة ومنعشة</p>
+                    <span class="category-count">2 صنف <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+            </button>
+            </div>
+
+            <!-- نتائج البحث السريع تظهر هنا -->
+            <div id="searchResultsContainer" style="display:none;"></div>
+
+                <div class="category-panel" id="panel-trays">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية الأكيلة</h4>
+                                <p>300 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية الأكيلة', '300 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية عربي ميكس</h4>
+                                <p>320 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية عربي ميكس', '320 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <span class="best-seller-tag"><i class="fa-solid fa-fire"></i> الأكثر طلباً</span>
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية بوابة دمشق</h4>
+                                <p>430 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية بوابة دمشق', '430 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية القرمشة</h4>
+                                <p>445 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية القرمشة', '445 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية ميكس جريل</h4>
+                                <p>450 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية ميكس جريل', '450 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية السعادة</h4>
+                                <p>600 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية السعادة', '600 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية لمة الصحاب (4-5 أفراد)</h4>
+                                <p>1250 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية لمة الصحاب (4-5 أفراد)', '1250 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية لمة الحبايب (5-7 أفراد)</h4>
+                                <p>1550 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية لمة الحبايب (5-7 أفراد)', '1550 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>صينية لمة العيلة (8-9 أفراد)</h4>
+                                <p>2350 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('صينية لمة العيلة (8-9 أفراد)', '2350 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-grills">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>دجاجة مشوية على الفحم</h4>
+                                <p>350 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('دجاجة مشوية على الفحم', '350 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>ميكس جريل</h4>
+                                <p>نص كيلو 420 | كيلو 600 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('ميكس جريل', 'نص كيلو 420 | كيلو 600 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>كفتة لحم</h4>
+                                <p>نص كيلو 360 | كيلو 700 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كفتة لحم', 'نص كيلو 360 | كيلو 700 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>كفتة دجاج</h4>
+                                <p>نص كيلو 275 | كيلو 530 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كفتة دجاج', 'نص كيلو 275 | كيلو 530 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>كفتة ميكس</h4>
+                                <p>نص كيلو 340 | كيلو 650 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كفتة ميكس', 'نص كيلو 340 | كيلو 650 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>شيش طاووق</h4>
+                                <p>نص كيلو 340 | كيلو 650 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('شيش طاووق', 'نص كيلو 340 | كيلو 650 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>كباب بتلو</h4>
+                                <p>نص كيلو 485 | كيلو 950 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كباب بتلو', 'نص كيلو 485 | كيلو 950 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>كباب وكفتة</h4>
+                                <p>نص كيلو 435 | كيلو 850 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كباب وكفتة', 'نص كيلو 435 | كيلو 850 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>ريش بتلو مشوية</h4>
+                                <p>نص كيلو 485 | كيلو 950 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('ريش بتلو مشوية', 'نص كيلو 485 | كيلو 950 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-meals">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة ربع وراك</h4>
+                                <p>105 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة ربع وراك', '105 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة ربع صدر (مسحب / اسكالوب)</h4>
+                                <p>115 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة ربع صدر (مسحب / اسكالوب)', '115 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة كفتة دجاج</h4>
+                                <p>صغيرة 95 | كبيرة 150 | سوبر 115 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة كفتة دجاج', 'صغيرة 95 | كبيرة 150 | سوبر 115 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة كفتة لحم</h4>
+                                <p>صغيرة 105 | كبيرة 190 | سوبر 125 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة كفتة لحم', 'صغيرة 105 | كبيرة 190 | سوبر 125 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة كفتة ميكس</h4>
+                                <p>صغيرة 100 | كبيرة 180 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة كفتة ميكس', 'صغيرة 100 | كبيرة 180 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة شيش طاووق</h4>
+                                <p>صغيرة 100 | كبيرة 180 | سوبر 120 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة شيش طاووق', 'صغيرة 100 | كبيرة 180 | سوبر 120 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة ميكس جريل</h4>
+                                <p>صغيرة 145 | كبيرة 230 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة ميكس جريل', 'صغيرة 145 | كبيرة 230 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة ميكس جريل شرقي</h4>
+                                <p>250 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة ميكس جريل شرقي', '250 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة نص دجاجة مشوي عالفحم</h4>
+                                <p>200 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة نص دجاجة مشوي عالفحم', '200 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.315s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة دجاج كريسبي</h4>
+                                <p>140 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة دجاج كريسبي', '140 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.350s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة بانيه</h4>
+                                <p>140 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة بانيه', '140 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.385s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة بوابة دمشق وراك</h4>
+                                <p>145 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة بوابة دمشق وراك', '145 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.420s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة بوابة دمشق صدر</h4>
+                                <p>155 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة بوابة دمشق صدر', '155 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.455s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة كباب وكفتة</h4>
+                                <p>235 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة كباب وكفتة', '235 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة كباب</h4>
+                                <p>255 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة كباب', '255 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#d84315"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة ريش</h4>
+                                <p>255 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة ريش', '255 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#c2860a"><i class="fa-solid fa-bowl-rice"></i></div>
+                            <div class="item-info">
+                                <h4>وجبة حمام محشي أرز</h4>
+                                <p>فرد 160 | سوبر 175 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('وجبة حمام محشي أرز', 'فرد 160 | سوبر 175 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-shawarma">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>فتة شاورما دجاج</h4>
+                                <p>130 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فتة شاورما دجاج', '130 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>طبق عربي شاورما دجاج</h4>
+                                <p>130 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('طبق عربي شاورما دجاج', '130 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>فتة كريسبي صغير</h4>
+                                <p>130 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فتة كريسبي صغير', '130 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>ماريا شاورما فراخ</h4>
+                                <p>130 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('ماريا شاورما فراخ', '130 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>ربع كيلو شاورما دجاج</h4>
+                                <p>165 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('ربع كيلو شاورما دجاج', '165 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>شير بوكس عربي</h4>
+                                <p>165 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('شير بوكس عربي', '165 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>لنش بوكس فينو (4 سندوتشات)</h4>
+                                <p>170 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('لنش بوكس فينو (4 سندوتشات)', '170 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>نص كيلو شاورما دجاج</h4>
+                                <p>320 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('نص كيلو شاورما دجاج', '320 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#8e4a1f"><i class="fa-solid fa-bacon"></i></div>
+                            <div class="item-info">
+                                <h4>كيلو شاورما دجاج</h4>
+                                <p>610 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كيلو شاورما دجاج', '610 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-sandwiches">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش بطاطس ثومية</h4>
+                                <p>صغير 25 | كبير 35 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش بطاطس ثومية', 'صغير 25 | كبير 35 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <span class="best-seller-tag"><i class="fa-solid fa-fire"></i> الأكثر طلباً</span>
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش شاورما دجاج</h4>
+                                <p>صغير 45 | وسط 60 | كبير 70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش شاورما دجاج', 'صغير 45 | وسط 60 | كبير 70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش كفتة لحم</h4>
+                                <p>صغير 45 | وسط 55 | كبير 75 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش كفتة لحم', 'صغير 45 | وسط 55 | كبير 75 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش كفتة دجاج</h4>
+                                <p>صغير 45 | وسط 60 | كبير 70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش كفتة دجاج', 'صغير 45 | وسط 60 | كبير 70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش شيش طاووق</h4>
+                                <p>صغير 45 | وسط 60 | كبير 70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش شيش طاووق', 'صغير 45 | وسط 60 | كبير 70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش فاهيتا دجاج</h4>
+                                <p>صغير 45 | وسط 60 | كبير 70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش فاهيتا دجاج', 'صغير 45 | وسط 60 | كبير 70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش دجاج بانيه</h4>
+                                <p>صغير 45 | وسط 60 | كبير 70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش دجاج بانيه', 'صغير 45 | وسط 60 | كبير 70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>سندوتش دجاج كريسبي</h4>
+                                <p>صغير 45 | وسط 60 | كبير 70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سندوتش دجاج كريسبي', 'صغير 45 | وسط 60 | كبير 70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>حواوشي وش بيتزا صغير</h4>
+                                <p>130 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('حواوشي وش بيتزا صغير', '130 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.315s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>حواوشي وش بيتزا كبير</h4>
+                                <p>150 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('حواوشي وش بيتزا كبير', '150 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-crepe">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>كريب بطاطس وموزاريلا</h4>
+                                <p>60 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب بطاطس وموزاريلا', '60 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب سوسيس</h4>
+                                <p>80 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب سوسيس', '80 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب لحم مفروم</h4>
+                                <p>90 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب لحم مفروم', '90 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب سجق</h4>
+                                <p>90 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب سجق', '90 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب مشكل جبن</h4>
+                                <p>90 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب مشكل جبن', '90 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب كفتة دجاج</h4>
+                                <p>90 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب كفتة دجاج', '90 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب كريسبي</h4>
+                                <p>90 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب كريسبي', '90 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب بانيه</h4>
+                                <p>90 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب بانيه', '90 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب شيش طاووق</h4>
+                                <p>95 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب شيش طاووق', '95 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.315s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب شاورما دجاج</h4>
+                                <p>100 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب شاورما دجاج', '100 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.350s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب كفتة لحم</h4>
+                                <p>105 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب كفتة لحم', '105 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.385s">
+                            <div class="item-icon" style="background:#6d4c1f"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div class="item-info">
+                                <h4>كريب مشكل لحوم</h4>
+                                <p>105 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كريب مشكل لحوم', '105 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-pizza">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا مارجريتا</h4>
+                                <p>115 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا مارجريتا', '115 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا خضروات</h4>
+                                <p>120 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا خضروات', '120 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا سوسيس</h4>
+                                <p>125 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا سوسيس', '125 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا مشكل جبن</h4>
+                                <p>125 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا مشكل جبن', '125 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا لحم مفروم</h4>
+                                <p>125 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا لحم مفروم', '125 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا سجق</h4>
+                                <p>135 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا سجق', '135 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <span class="best-seller-tag"><i class="fa-solid fa-fire"></i> الأكثر طلباً</span>
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا شاورما دجاج</h4>
+                                <p>150 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا شاورما دجاج', '150 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا تونة</h4>
+                                <p>150 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا تونة', '150 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا بسطرمة</h4>
+                                <p>155 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا بسطرمة', '155 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.315s">
+                            <div class="item-icon" style="background:#c0392b"><i class="fa-solid fa-pizza-slice"></i></div>
+                            <div class="item-info">
+                                <h4>بيتزا مشكل لحوم</h4>
+                                <p>155 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('بيتزا مشكل لحوم', '155 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.350s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة مشكل جبن</h4>
+                                <p>130 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة مشكل جبن', '130 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.385s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة لحم مفروم</h4>
+                                <p>135 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة لحم مفروم', '135 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.420s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة سوسيس</h4>
+                                <p>135 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة سوسيس', '135 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.455s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة سجق</h4>
+                                <p>145 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة سجق', '145 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة تونة</h4>
+                                <p>160 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة تونة', '160 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة مشكل لحوم</h4>
+                                <p>160 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة مشكل لحوم', '160 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة بسطرمة</h4>
+                                <p>165 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة بسطرمة', '165 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة شاورما دجاج</h4>
+                                <p>165 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة شاورما دجاج', '165 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة سكر</h4>
+                                <p>75 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة سكر', '75 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة كاستر</h4>
+                                <p>80 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة كاستر', '80 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة بغاشة</h4>
+                                <p>90 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة بغاشة', '90 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>فطيرة قشطة وعسل</h4>
+                                <p>100 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فطيرة قشطة وعسل', '100 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-manakish">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة زعتر</h4>
+                                <p>55 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة زعتر', '55 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة زعتر جبنة</h4>
+                                <p>65 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة زعتر جبنة', '65 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.070s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة جبنة موزاريلا</h4>
+                                <p>65 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة جبنة موزاريلا', '65 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.105s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة جبنة موزاريلا بالزيتون</h4>
+                                <p>65 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة جبنة موزاريلا بالزيتون', '65 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.140s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة لحم مفروم</h4>
+                                <p>70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة لحم مفروم', '70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.175s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة سوسيس جبنة</h4>
+                                <p>70 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة سوسيس جبنة', '70 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.210s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة سجق جبنة</h4>
+                                <p>75 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة سجق جبنة', '75 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.245s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة بسطرمة جبنة</h4>
+                                <p>85 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة بسطرمة جبنة', '85 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.280s">
+                            <div class="item-icon" style="background:#a9762b"><i class="fa-solid fa-bread-slice"></i></div>
+                            <div class="item-info">
+                                <h4>منقوشة شاورما دجاج</h4>
+                                <p>85 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('منقوشة شاورما دجاج', '85 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.315s">
+                            <div class="item-icon" style="background:#3f8f3f"><i class="fa-solid fa-leaf"></i></div>
+                            <div class="item-info">
+                                <h4>تومية</h4>
+                                <p>15 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('تومية', '15 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.350s">
+                            <div class="item-icon" style="background:#3f8f3f"><i class="fa-solid fa-leaf"></i></div>
+                            <div class="item-info">
+                                <h4>طحينة</h4>
+                                <p>20 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('طحينة', '20 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.385s">
+                            <div class="item-icon" style="background:#3f8f3f"><i class="fa-solid fa-leaf"></i></div>
+                            <div class="item-info">
+                                <h4>سلطة خضراء</h4>
+                                <p>25 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سلطة خضراء', '25 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.420s">
+                            <div class="item-icon" style="background:#b3541e"><i class="fa-solid fa-burger"></i></div>
+                            <div class="item-info">
+                                <h4>طبق بطاطس</h4>
+                                <p>30 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('طبق بطاطس', '30 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.455s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>كولسلو</h4>
+                                <p>30 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كولسلو', '30 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#c2860a"><i class="fa-solid fa-bowl-rice"></i></div>
+                            <div class="item-info">
+                                <h4>طبق أرز بسمتي</h4>
+                                <p>45 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('طبق أرز بسمتي', '45 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a15c1f"><i class="fa-solid fa-cookie-bite"></i></div>
+                            <div class="item-info">
+                                <h4>سمبوسك جبنة (4 قطع)</h4>
+                                <p>60 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سمبوسك جبنة (4 قطع)', '60 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#3f8f3f"><i class="fa-solid fa-leaf"></i></div>
+                            <div class="item-info">
+                                <h4>فتوش</h4>
+                                <p>60 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('فتوش', '60 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a15c1f"><i class="fa-solid fa-cookie-bite"></i></div>
+                            <div class="item-info">
+                                <h4>كبيبة شامي (4 قطع)</h4>
+                                <p>65 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('كبيبة شامي (4 قطع)', '65 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#a15c1f"><i class="fa-solid fa-cookie-bite"></i></div>
+                            <div class="item-info">
+                                <h4>سمبوسك لحم (4 قطع)</h4>
+                                <p>65 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('سمبوسك لحم (4 قطع)', '65 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#3f8f3f"><i class="fa-solid fa-leaf"></i></div>
+                            <div class="item-info">
+                                <h4>محشي ورق عنب</h4>
+                                <p>80 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('محشي ورق عنب', '80 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#c2860a"><i class="fa-solid fa-bowl-rice"></i></div>
+                            <div class="item-info">
+                                <h4>محشي ممبار</h4>
+                                <p>80 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('محشي ممبار', '80 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#c2860a"><i class="fa-solid fa-bowl-rice"></i></div>
+                            <div class="item-info">
+                                <h4>طبق محشي مشكل</h4>
+                                <p>80 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('طبق محشي مشكل', '80 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.490s">
+                            <div class="item-icon" style="background:#e07a00"><i class="fa-solid fa-drumstick-bite"></i></div>
+                            <div class="item-info">
+                                <h4>طبق مقبلات مشكل دمشقي</h4>
+                                <p>200 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('طبق مقبلات مشكل دمشقي', '200 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-panel" id="panel-drinks">
+            <div class="category-panel-inner">
+                <div class="items-list">
+                        <div class="item-row" style="animation-delay:0.000s">
+                            <div class="item-icon" style="background:#0e7c86"><i class="fa-solid fa-bottle-water"></i></div>
+                            <div class="item-info">
+                                <h4>مياه معدنية (صغيرة)</h4>
+                                <p>10 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('مياه معدنية (صغيرة)', '10 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                        <div class="item-row" style="animation-delay:0.035s">
+                            <div class="item-icon" style="background:#0e7c86"><i class="fa-solid fa-bottle-water"></i></div>
+                            <div class="item-info">
+                                <h4>مياه غازية</h4>
+                                <p>20 جنيه</p>
+                            </div>
+                            <button class="order-btn" onclick="addToCart('مياه غازية', '20 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    </div>
+
+    <!-- ================= 3. صفحة عن المطعم ================= -->
+    <div id="about" class="page-content">
+        <div class="page-header">
+            <h1>قصة أصالتنا العريقة</h1>
+            <p>نقلنا لكم عراقة الشام وأسرار نكهاتها لتستمتعوا بها في قلب دسوق</p>
+        </div>
+        <section class="about-container container reveal-on-scroll">
+            <div class="about-text">
+                <h2>مرحباً بكم في مطعم بوابة دمشق</h2>
+                <p>تأسس مطعمنا لنكون الوجهة الأولى لكل عشاق المطبخ الشامي الأصيل. نحن نؤمن بأن الطعام ليس مجرد وجبة، بل هو تجربة تنقلك مباشرة إلى أزقة دمشق القديمة برائحة الشاورما على الفحم والبهارات الطازجة.</p>
+                <p>نحرص على استخدام أفضل المكونات المحلية والعالمية، وتقديمها بمعايير نظافة وجودة لا تقبل التنازل، وبإشراف طهاة محترفين يمتلكون خبرة طويلة في أصول الطهي الدمشقي.</p>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="مطعم بوابة دمشق">
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= 4. صفحة تواصل معنا ================= -->
+    <div id="contact" class="page-content">
+        <div class="page-header">
+            <h1>تواصل معنا واطلب دليفري</h1>
+            <p>نحن في خدمة إضافية طوال أيام الأسبوع لتلبية طلباتكم</p>
+        </div>
+        <section class="contact-section container reveal-on-scroll">
+            <div class="contact-cards">
+                <div class="c-card">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <h3>الهاتف الثابت</h3>
+                    <p><a href="tel:0472559855">0472559855</a></p>
+                </div>
+                <div class="c-card">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h3>رقم الواتساب للطلبات</h3>
+                    <p><a href="https://wa.me/201015007894" target="_blank">+201015007894</a></p>
+                </div>
+                <div class="c-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>العنوان</h3>
+                    <p>دسوق - شارع الجيش، طريق الموقف الجديد</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- الفوتر العام -->
+    <footer>
+        <div class="footer-content">
+            <p>جميع الحقوق محفوظة © 2026 مطعم بوابة دمشق | تصميم <a href="tel:+201021904453" style="color:#ffb703; text-decoration:none; font-weight:800;">M KHODY</a></p>
+            <p>الهواتف المتاحة للطلبات: 0472559855 - +201015007894</p>
+            <button class="admin-link-btn" onclick="openAdminPanel()"><i class="fa-solid fa-user-gear"></i> لوحة الإدارة</button>
+        </div>
+    </footer>
+
+    <!-- زرار السلة العائم -->
+    <button class="cart-fab" id="cartFab" onclick="openCartModal()" aria-label="سلة الطلبات">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+
+    <!-- نافذة السلة: عرض كل الأصناف المختارة قبل إتمام الطلب -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeCartModal()">&times;</button>
+            <h3><i class="fa-solid fa-cart-shopping"></i> سلة الطلبات</h3>
+            <div id="cartItemsList"></div>
+            <button class="btn secondary-btn order-btn modal-submit-btn" id="cartCheckoutBtn" onclick="proceedToCheckout()"><i class="fa-brands fa-whatsapp"></i> إتمام الطلب</button>
+        </div>
+    </div>
+
+    <!-- نافذة إتمام الطلب: نوع الطلب (توصيل / داخل المطعم) وبياناته -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+            <h3><i class="fa-brands fa-whatsapp"></i> إتمام الطلب</h3>
+            <div class="modal-item-info" id="checkoutSummary"></div>
+
+            <label>نوع الطلب</label>
+            <div class="order-type-toggle">
+                <button type="button" class="order-type-btn active" id="btnDelivery" onclick="setOrderType('delivery')"><i class="fa-solid fa-motorcycle"></i> توصيل</button>
+                <button type="button" class="order-type-btn" id="btnDineIn" onclick="setOrderType('dinein')"><i class="fa-solid fa-utensils"></i> داخل المطعم</button>
+            </div>
+
+            <div id="deliveryFields">
+                <label for="custName">الاسم بالكامل</label>
+                <input type="text" id="custName" placeholder="مثال: أحمد محمد">
+                <label for="custAddress">العنوان بالتفصيل</label>
+                <textarea id="custAddress" placeholder="المنطقة - الشارع - رقم المنزل/العمارة - أقرب علامة مميزة"></textarea>
+                <label for="custPhone">رقم الهاتف</label>
+                <input type="text" id="custPhone" placeholder="01xxxxxxxxx">
+            </div>
+
+            <div id="dineInFields" style="display:none;">
+                <label for="dineName">الاسم (اختياري)</label>
+                <input type="text" id="dineName" placeholder="مثال: أحمد">
+                <label for="tableNumber">رقم الطاولة</label>
+                <input type="text" id="tableNumber" placeholder="مثال: 5">
+            </div>
+
+            <button class="btn secondary-btn order-btn modal-submit-btn" onclick="submitOrder()"><i class="fa-brands fa-whatsapp"></i> إرسال الطلب على واتساب</button>
+            <p class="modal-hint">هنبعت طلبك وبياناتك مباشرة لواتساب المطعم لتأكيد الطلب</p>
+        </div>
+    </div>
+
+    <!-- لوحة تحكم الأدمن: تعديل عرض اليوم -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeAdminPanel()">&times;</button>
+            <h3><i class="fa-solid fa-user-gear"></i> لوحة تحكم العروض</h3>
+            <label class="admin-checkbox-label"><input type="checkbox" id="adminOfferActive"> إظهار شريط العرض للعملاء</label>
+            <label for="adminOfferBadge">تسمية الشارة (مثال: عرض اليوم)</label>
+            <input type="text" id="adminOfferBadge">
+            <label for="adminOfferTitle">اسم العرض</label>
+            <input type="text" id="adminOfferTitle">
+            <label for="adminOfferDesc">وصف العرض</label>
+            <textarea id="adminOfferDesc"></textarea>
+            <label for="adminOfferOldPrice">السعر قبل الخصم</label>
+            <input type="text" id="adminOfferOldPrice">
+            <label for="adminOfferNewPrice">السعر بعد الخصم</label>
+            <input type="text" id="adminOfferNewPrice">
+            <button class="btn primary-btn order-btn modal-submit-btn" onclick="saveOfferFromAdmin()"><i class="fa-solid fa-floppy-disk"></i> حفظ العرض</button>
+            <p class="modal-hint">ملحوظة: الحفظ بيتم على هذا الجهاز/المتصفح فقط، مش على كل زوار الموقع.</p>
+        </div>
+    </div>
+
+    <!-- البرمجة والتفاعل السلس (JavaScript) -->
+    <script>
+        // دالة التنقل السلس بين الصفحات داخل نفس الملف الواحد
+        function switchPage(pageId, element) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            document.getElementById(pageId).classList.add('active-page');
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            if(element) element.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // رقم الواتساب المعتمد للطلبات
+        const restaurantWhatsApp = "201015007894";
+
+        // كلمة مرور لوحة الإدارة - غيّرها لأي حاجة تانية تحبها
+        const ADMIN_PASSWORD = "1520";
+
+        // ================= نظام السلة =================
+        let cart = []; // كل عنصر: { name, price, qty }
+        let currentOrderType = 'delivery';
+
+        function loadCart() {
+            try {
+                const s = localStorage.getItem('restaurantCart');
+                cart = s ? JSON.parse(s) : [];
+            } catch (e) {
+                cart = [];
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('restaurantCart', JSON.stringify(cart));
+        }
+
+        function updateCartBadge() {
+            const total = cart.reduce((sum, i) => sum + i.qty, 0);
+            const badge = document.getElementById('cartBadge');
+            badge.textContent = total;
+            badge.style.display = total > 0 ? 'flex' : 'none';
+        }
+
+        // إضافة صنف للسلة بدل الطلب الفوري - بتزود الكمية لو الصنف موجود بالفعل
+        function addToCart(mealName, mealPrice) {
+            const existing = cart.find(i => i.name === mealName && i.price === mealPrice);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name: mealName, price: mealPrice, qty: 1 });
+            }
+            saveCart();
+            updateCartBadge();
+            showToast(`تمت إضافة "${mealName}" للسلة`);
+        }
+
+        function changeQty(idx, delta) {
+            cart[idx].qty += delta;
+            if (cart[idx].qty <= 0) cart.splice(idx, 1);
+            saveCart();
+            updateCartBadge();
+            renderCartModal();
+        }
+
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            saveCart();
+            updateCartBadge();
+            renderCartModal();
+        }
+
+        function renderCartModal() {
+            const container = document.getElementById('cartItemsList');
+            const checkoutBtn = document.getElementById('cartCheckoutBtn');
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="no-results">السلة فاضية، دور على أصنافك واضغط "أضف" 🛒</p>';
+                checkoutBtn.style.display = 'none';
+                return;
+            }
+            checkoutBtn.style.display = '';
+            container.innerHTML = cart.map((item, idx) => `
+                <div class="cart-item-row">
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p>${item.price}</p>
+                    </div>
+                    <div class="cart-item-qty">
+                        <button onclick="changeQty(${idx}, -1)">−</button>
+                        <span>${item.qty}</span>
+                        <button onclick="changeQty(${idx}, 1)">+</button>
+                    </div>
+                    <button class="cart-remove-btn" onclick="removeFromCart(${idx})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function openCartModal() {
+            renderCartModal();
+            document.getElementById('cartModal').classList.add('open');
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').classList.remove('open');
+        }
+
+        document.getElementById('cartModal').addEventListener('click', function(e) {
+            if (e.target === this) closeCartModal();
+        });
+
+        // تنبيه صغير يظهر عند إضافة صنف للسلة
+        function showToast(msg) {
+            let toast = document.getElementById('cartToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'cartToast';
+                toast.className = 'cart-toast';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+        }
+
+        // ================= إتمام الطلب (توصيل / داخل المطعم) =================
+        function proceedToCheckout() {
+            if (cart.length === 0) return;
+            closeCartModal();
+            renderCheckoutSummary();
+            setOrderType('delivery');
+            document.getElementById('custName').value = '';
+            document.getElementById('custAddress').value = '';
+            document.getElementById('custPhone').value = '';
+            document.getElementById('dineName').value = '';
+            document.getElementById('tableNumber').value = '';
+            document.getElementById('orderModal').classList.add('open');
+        }
+
+        function renderCheckoutSummary() {
+            const el = document.getElementById('checkoutSummary');
+            el.innerHTML = '<strong>ملخص الطلب:</strong><br>' +
+                cart.map(i => `${i.name} × ${i.qty} — ${i.price}`).join('<br>');
+        }
+
+        function setOrderType(type) {
+            currentOrderType = type;
+            document.getElementById('btnDelivery').classList.toggle('active', type === 'delivery');
+            document.getElementById('btnDineIn').classList.toggle('active', type === 'dinein');
+            document.getElementById('deliveryFields').style.display = type === 'delivery' ? '' : 'none';
+            document.getElementById('dineInFields').style.display = type === 'dinein' ? '' : 'none';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('open');
+        }
+
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) closeOrderModal();
+        });
+
+        // إرسال الطلب النهائي (كل أصناف السلة) مع نوع الطلب لواتساب المطعم
+        function submitOrder() {
+            if (cart.length === 0) {
+                alert('السلة فاضية');
+                return;
+            }
+
+            let text = `مرحباً مطعم بوابة دمشق، أود طلب التالي:\n\n`;
+            cart.forEach(i => {
+                text += `- ${i.name} × ${i.qty} (${i.price})\n`;
+            });
+            text += `\n`;
+
+            if (currentOrderType === 'delivery') {
+                const name = document.getElementById('custName').value.trim();
+                const address = document.getElementById('custAddress').value.trim();
+                const phone = document.getElementById('custPhone').value.trim();
+                if (!name || !address) {
+                    alert('من فضلك اكتب الاسم الكامل والعنوان بالتفصيل قبل إرسال الطلب');
+                    return;
+                }
+                text += `*نوع الطلب:* توصيل\n*الاسم:* ${name}\n*العنوان:* ${address}`;
+                if (phone) text += `\n*رقم الهاتف:* ${phone}`;
+            } else {
+                const dineName = document.getElementById('dineName').value.trim();
+                const table = document.getElementById('tableNumber').value.trim();
+                if (!table) {
+                    alert('من فضلك اكتب رقم الطاولة قبل إرسال الطلب');
+                    return;
+                }
+                text += `*نوع الطلب:* تناول داخل المطعم\n*رقم الطاولة:* ${table}`;
+                if (dineName) text += `\n*الاسم:* ${dineName}`;
+            }
+
+            text += `\n\nيرجى تأكيد الطلب.`;
+
+            let encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/${restaurantWhatsApp}?text=${encoded}`, '_blank');
+            closeOrderModal();
+            cart = [];
+            saveCart();
+            updateCartBadge();
+        }
+
+        // ================= لوحة تحكم الأدمن (عرض اليوم) =================
+        function getOfferData() {
+            const defaults = {
+                active: true,
+                badge: 'عرض اليوم',
+                title: 'كومبو العيلة الموفر',
+                desc: '2 سندوتش شاورما دجاج كبير + بطاطس + مشروب',
+                oldPrice: '150 جنيه',
+                newPrice: '99 جنيه'
+            };
+            try {
+                const s = localStorage.getItem('restaurantOfferData');
+                return s ? Object.assign({}, defaults, JSON.parse(s)) : defaults;
+            } catch (e) {
+                return defaults;
+            }
+        }
+
+        function renderOfferBanner() {
+            const o = getOfferData();
+            const banner = document.getElementById('offerBanner');
+            if (!o.active || !o.title) {
+                banner.style.display = 'none';
+                return;
+            }
+            banner.style.display = '';
+            document.getElementById('offerBadgeText').textContent = o.badge;
+            document.getElementById('offerTitleText').textContent = o.title;
+            document.getElementById('offerDescText').textContent = o.desc;
+            document.getElementById('offerOldPriceText').textContent = o.oldPrice;
+            document.getElementById('offerNewPriceText').textContent = o.newPrice;
+            const btn = document.getElementById('offerAddBtn');
+            btn.onclick = function() {
+                addToCart(o.title + ' (عرض)', o.newPrice);
+            };
+        }
+
+        function openAdminPanel() {
+            const pass = prompt('من فضلك ادخل كلمة مرور الإدارة:');
+            if (pass === null) return;
+            if (pass !== ADMIN_PASSWORD) {
+                alert('كلمة المرور غير صحيحة');
+                return;
+            }
+            const o = getOfferData();
+            document.getElementById('adminOfferActive').checked = o.active;
+            document.getElementById('adminOfferBadge').value = o.badge;
+            document.getElementById('adminOfferTitle').value = o.title;
+            document.getElementById('adminOfferDesc').value = o.desc;
+            document.getElementById('adminOfferOldPrice').value = o.oldPrice;
+            document.getElementById('adminOfferNewPrice').value = o.newPrice;
+            document.getElementById('adminModal').classList.add('open');
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminModal').classList.remove('open');
+        }
+
+        document.getElementById('adminModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAdminPanel();
+        });
+
+        function saveOfferFromAdmin() {
+            const data = {
+                active: document.getElementById('adminOfferActive').checked,
+                badge: document.getElementById('adminOfferBadge').value.trim() || 'عرض اليوم',
+                title: document.getElementById('adminOfferTitle').value.trim(),
+                desc: document.getElementById('adminOfferDesc').value.trim(),
+                oldPrice: document.getElementById('adminOfferOldPrice').value.trim(),
+                newPrice: document.getElementById('adminOfferNewPrice').value.trim()
+            };
+            localStorage.setItem('restaurantOfferData', JSON.stringify(data));
+            renderOfferBanner();
+            closeAdminPanel();
+            alert('تم حفظ العرض بنجاح على هذا الجهاز');
+        }
+
+        // تحميل السلة والعرض المحفوظين عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            updateCartBadge();
+            renderOfferBanner();
+            initCursorFX();
+            initTilt3D();
+            initScrollReveal();
+        });
+
+        // ================= المؤشر المضيء الخطير (Cursor FX) =================
+        function initCursorFX() {
+            const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            if (isTouch) return;
+
+            const glow = document.getElementById('cursorGlow');
+            const dot = document.getElementById('cursorDot');
+            if (!glow || !dot) return;
+
+            let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+            let glowX = mouseX, glowY = mouseY;
+            let dotX = mouseX, dotY = mouseY;
+            let started = false;
+
+            // إنشاء ذيل المذنب: مجموعة نقاط بتتبع الماوس بتأخير متزايد وتتلاشى تدريجياً
+            const TRAIL_LENGTH = 10;
+            const trailEls = [];
+            const trailPos = [];
+            for (let i = 0; i < TRAIL_LENGTH; i++) {
+                const t = document.createElement('div');
+                t.className = 'cursor-trail';
+                document.body.appendChild(t);
+                trailEls.push(t);
+                trailPos.push({ x: mouseX, y: mouseY });
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                if (!started) {
+                    started = true;
+                    glow.classList.add('active');
+                }
+            });
+
+            // تكبير المؤشر عند المرور على أي عنصر تفاعلي
+            document.addEventListener('mouseover', (e) => {
+                if (e.target.closest('button, a, input, textarea, .order-btn, .category-cover')) {
+                    glow.classList.add('hovering');
+                }
+            });
+            document.addEventListener('mouseout', (e) => {
+                if (e.target.closest('button, a, input, textarea, .order-btn, .category-cover')) {
+                    glow.classList.remove('hovering');
+                }
+            });
+
+            // شرارات ذهبية بتتطاير في كل الاتجاهات عند أي ضغطة ماوس
+            document.addEventListener('mousedown', (e) => {
+                const sparkCount = 10;
+                for (let i = 0; i < sparkCount; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'click-spark';
+                    const angle = (Math.PI * 2 * i) / sparkCount + Math.random() * 0.4;
+                    const distance = 30 + Math.random() * 30;
+                    spark.style.setProperty('--sx', Math.cos(angle) * distance + 'px');
+                    spark.style.setProperty('--sy', Math.sin(angle) * distance + 'px');
+                    spark.style.left = e.clientX + 'px';
+                    spark.style.top = e.clientY + 'px';
+                    document.body.appendChild(spark);
+                    setTimeout(() => spark.remove(), 700);
+                }
+            });
+
+            function animateCursor() {
+                // حركة مرنة بتتأخر شوية عن الماوس (Lerp) عشان تحس إنها انميشن سلس
+                glowX += (mouseX - glowX) * 0.18;
+                glowY += (mouseY - glowY) * 0.18;
+                dotX += (mouseX - dotX) * 0.35;
+                dotY += (mouseY - dotY) * 0.35;
+
+                glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+                dot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+
+                // كل نقطة في الذيل بتلحق اللي قبلها بتأخير بسيط، فبيتكون ذيل متلاحق
+                let leadX = dotX, leadY = dotY;
+                trailPos.forEach((p, i) => {
+                    p.x += (leadX - p.x) * 0.28;
+                    p.y += (leadY - p.y) * 0.28;
+                    leadX = p.x;
+                    leadY = p.y;
+                    const fade = 1 - i / TRAIL_LENGTH;
+                    const size = 6 * fade + 1;
+                    trailEls[i].style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%, -50%)`;
+                    trailEls[i].style.opacity = (fade * 0.55).toFixed(2);
+                    trailEls[i].style.width = size + 'px';
+                    trailEls[i].style.height = size + 'px';
+                });
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+        }
+
+        // ================= تأثير الميلان ثلاثي الأبعاد (3D Tilt) =================
+        function initTilt3D() {
+            const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            if (isTouch) return;
+
+            document.querySelectorAll('.tilt-3d').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    const rotateX = ((centerY - y) / centerY) * 10;
+                    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.04, 1.04, 1.04)`;
+                    card.style.boxShadow = `${-rotateY * 1.5}px ${rotateX * 1.5 + 12}px 30px rgba(224, 122, 0, 0.35)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    card.style.boxShadow = '';
+                });
+            });
+        }
+
+        // ================= ظهور تدريجي للأقسام عند التمرير =================
+        function initScrollReveal() {
+            const items = document.querySelectorAll('.reveal-on-scroll');
+            if (!items.length) return;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            items.forEach(item => observer.observe(item));
+        }
+
+        // نظام الأكورديون: كارت واحد ظاهر لكل قسم، وبالضغط عليه تنفتح كل أصنافه
+        function toggleCategory(key) {
+            const cover = document.querySelector('.category-cover[data-target="' + key + '"]');
+            const panel = document.getElementById('panel-' + key);
+            const isOpen = panel.classList.contains('open');
+
+            // اقفل أي قسم مفتوح غير القسم الحالي
+            document.querySelectorAll('.category-panel.open').forEach(p => {
+                if (p !== panel) {
+                    p.classList.remove('open');
+                    const otherKey = p.id.replace('panel-', '');
+                    const otherCover = document.querySelector('.category-cover[data-target="' + otherKey + '"]');
+                    if (otherCover) otherCover.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            if (isOpen) {
+                panel.classList.remove('open');
+                cover.setAttribute('aria-expanded', 'false');
+            } else {
+                panel.classList.add('open');
+                cover.setAttribute('aria-expanded', 'true');
+                // ننتظر انتهاء أنيميشن الفتح (0.5 ثانية) بعدين ننزل مباشرة لأول الأصناف
+                // بحيث تظهر الأصناف فوراً في الشاشة من غير ما يحتاج يسحب لتحت بنفسه
+                setTimeout(() => {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 520);
+            }
+        }
+
+        // خانة البحث السريع: تدور على أي صنف بالاسم في كل الأقسام مرة واحدة
+        function filterMenu(query) {
+            query = query.trim();
+            const grid = document.querySelector('.category-grid');
+            const hint = document.querySelector('.category-hint');
+            const resultsContainer = document.getElementById('searchResultsContainer');
+            const panels = document.querySelectorAll('.category-panel');
+
+            if (!query) {
+                // رجوع للعرض العادي بالأقسام
+                resultsContainer.style.display = 'none';
+                resultsContainer.innerHTML = '';
+                grid.style.display = '';
+                hint.style.display = '';
+                return;
+            }
+
+            // إخفاء شبكة الأقسام وإقفال أي قسم مفتوح أثناء البحث
+            grid.style.display = 'none';
+            hint.style.display = 'none';
+            panels.forEach(p => p.classList.remove('open'));
+            document.querySelectorAll('.category-cover').forEach(c => c.setAttribute('aria-expanded', 'false'));
+
+            const matches = [];
+            document.querySelectorAll('.item-row').forEach(row => {
+                const nameEl = row.querySelector('h4');
+                if (nameEl && nameEl.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    matches.push(row);
+                }
+            });
+
+            resultsContainer.innerHTML = '';
+            resultsContainer.style.display = '';
+
+            if (matches.length === 0) {
+                resultsContainer.innerHTML = '<p class="no-results"><i class="fa-solid fa-circle-exclamation"></i> مفيش أصناف مطابقة لبحثك</p>';
+                return;
+            }
+
+            const list = document.createElement('div');
+            list.className = 'items-list search-result-list';
+            matches.forEach(row => {
+                list.appendChild(row.cloneNode(true));
+            });
+            resultsContainer.appendChild(list);
+        }
+    </script>
+</body>
+</html>
