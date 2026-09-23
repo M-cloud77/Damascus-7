@@ -47,92 +47,32 @@
             color: #2b2b2b;
         }
 
-        /* المؤشر المضيء المتحرك خلف الماوس - لون نيون متباين مع هوية الموقع الذهبية */
-        .cursor-glow {
+        /* المؤشر المتحرك على شكل فلفلة حمرا بدل الدايرة المضيئة */
+        .pepper-cursor {
             position: fixed;
             top: 0;
             left: 0;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.55) 0%, rgba(168, 85, 247, 0.45) 55%, rgba(168, 85, 247, 0) 78%);
-            border: 2px solid rgba(0, 229, 255, 0.85);
-            box-shadow: 0 0 18px rgba(0, 229, 255, 0.7), 0 0 34px rgba(168, 85, 247, 0.5);
+            font-size: 26px;
+            line-height: 1;
             pointer-events: none;
             z-index: 99999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+            transform: translate(-50%, -50%) rotate(-25deg);
             opacity: 0;
+            transition: opacity 0.2s ease, font-size 0.2s ease;
             will-change: transform;
+            filter: drop-shadow(0 3px 6px rgba(122, 12, 12, 0.45));
         }
 
-        .cursor-glow.active {
+        .pepper-cursor.active {
             opacity: 1;
         }
 
-        .cursor-glow.hovering {
-            width: 60px;
-            height: 60px;
-            border-color: rgba(255, 20, 147, 0.9);
-            background: radial-gradient(circle, rgba(255, 20, 147, 0.5) 0%, rgba(0, 229, 255, 0.4) 55%, rgba(0, 229, 255, 0) 78%);
-            box-shadow: 0 0 24px rgba(255, 20, 147, 0.8), 0 0 44px rgba(0, 229, 255, 0.55);
-        }
-
-        .cursor-dot {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #00e5ff;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.9);
-            pointer-events: none;
-            z-index: 99998;
-            opacity: 0.8;
-            transform: translate(-50%, -50%);
-            will-change: transform;
-        }
-
-        /* ذيل المذنب - نقاط متتالية بتتلاشى ورا المؤشر */
-        .cursor-trail {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00e5ff, #a855f7);
-            pointer-events: none;
-            z-index: 99997;
-            transform: translate(-50%, -50%);
-            will-change: transform, opacity, width, height;
-        }
-
-        /* شرارات الانفجار عند الضغط بالماوس */
-        .click-spark {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #ffb703;
-            pointer-events: none;
-            z-index: 99996;
-            transform: translate(-50%, -50%);
-            animation: sparkFly 0.65s ease-out forwards;
-        }
-
-        @keyframes sparkFly {
-            to {
-                transform: translate(calc(-50% + var(--sx)), calc(-50% + var(--sy))) scale(0);
-                opacity: 0;
-            }
+        .pepper-cursor.hovering {
+            font-size: 34px;
         }
 
         @media (hover: none), (pointer: coarse) {
-            .cursor-glow, .cursor-dot, .cursor-trail, .click-spark { display: none; }
+            .pepper-cursor { display: none; }
         }
 
         /* عناصر بتاعت تفاعل ثلاثي الأبعاد مع الماوس */
@@ -1043,33 +983,6 @@
             color: #e07a00;
         }
 
-        /* رابط لوحة الإدارة في الفوتر */
-        .admin-link-btn {
-            margin-top: 12px;
-            background: none;
-            border: none;
-            color: #6b7280;
-            font-size: 12px;
-            font-family: 'Cairo', sans-serif;
-            cursor: pointer;
-            opacity: 0.7;
-        }
-
-        .admin-link-btn:hover {
-            opacity: 1;
-            color: #ffb703;
-        }
-
-        .admin-checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #4b5563;
-            margin-top: 14px;
-        }
-
         /* تنبيه صغير عند إضافة صنف للسلة */
         .cart-toast {
             position: fixed;
@@ -1284,9 +1197,8 @@
 </head>
 <body>
 
-    <!-- المؤشر المضيء المتحرك (تأثير خطير للماوس) -->
-    <div class="cursor-glow" id="cursorGlow"></div>
-    <div class="cursor-dot" id="cursorDot"></div>
+    <!-- المؤشر المتحرك على شكل فلفلة حمرا -->
+    <div class="pepper-cursor" id="pepperCursor">🌶️</div>
 
     <!-- شريط التنقل الموحد -->
     <header class="navbar">
@@ -1352,7 +1264,7 @@
 
         <section class="menu-section-full container">
 
-            <!-- عرض اليوم / الكومبو المميز - يتحكم فيه الأدمن من لوحة الإدارة -->
+            <!-- عرض اليوم / الكومبو المميز -->
             <div class="offer-banner tilt-3d" id="offerBanner">
                 <span class="offer-badge"><i class="fa-solid fa-bolt"></i> <span id="offerBadgeText">عرض اليوم</span></span>
                 <div class="offer-content">
@@ -2465,7 +2377,6 @@
         <div class="footer-content">
             <p>جميع الحقوق محفوظة © 2026 مطعم بوابة دمشق | تصميم <a href="tel:+201021904453" style="color:#ffb703; text-decoration:none; font-weight:800;">M KHODY</a></p>
             <p>الهواتف المتاحة للطلبات: 0472559855 - +201015007894</p>
-            <button class="admin-link-btn" onclick="openAdminPanel()"><i class="fa-solid fa-user-gear"></i> لوحة الإدارة</button>
         </div>
     </footer>
 
@@ -2519,27 +2430,6 @@
         </div>
     </div>
 
-    <!-- لوحة تحكم الأدمن: تعديل عرض اليوم -->
-    <div class="modal-overlay" id="adminModal">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeAdminPanel()">&times;</button>
-            <h3><i class="fa-solid fa-user-gear"></i> لوحة تحكم العروض</h3>
-            <label class="admin-checkbox-label"><input type="checkbox" id="adminOfferActive"> إظهار شريط العرض للعملاء</label>
-            <label for="adminOfferBadge">تسمية الشارة (مثال: عرض اليوم)</label>
-            <input type="text" id="adminOfferBadge">
-            <label for="adminOfferTitle">اسم العرض</label>
-            <input type="text" id="adminOfferTitle">
-            <label for="adminOfferDesc">وصف العرض</label>
-            <textarea id="adminOfferDesc"></textarea>
-            <label for="adminOfferOldPrice">السعر قبل الخصم</label>
-            <input type="text" id="adminOfferOldPrice">
-            <label for="adminOfferNewPrice">السعر بعد الخصم</label>
-            <input type="text" id="adminOfferNewPrice">
-            <button class="btn primary-btn order-btn modal-submit-btn" onclick="saveOfferFromAdmin()"><i class="fa-solid fa-floppy-disk"></i> حفظ العرض</button>
-            <p class="modal-hint">ملحوظة: الحفظ بيتم على هذا الجهاز/المتصفح فقط، مش على كل زوار الموقع.</p>
-        </div>
-    </div>
-
     <!-- البرمجة والتفاعل السلس (JavaScript) -->
     <script>
         // دالة التنقل السلس بين الصفحات داخل نفس الملف الواحد
@@ -2559,9 +2449,6 @@
 
         // رقم الواتساب المعتمد للطلبات
         const restaurantWhatsApp = "201015007894";
-
-        // كلمة مرور لوحة الإدارة - غيّرها لأي حاجة تانية تحبها
-        const ADMIN_PASSWORD = "1520";
 
         // ================= نظام السلة =================
         let cart = []; // كل عنصر: { name, price, qty }
@@ -2748,181 +2635,65 @@
             updateCartBadge();
         }
 
-        // ================= لوحة تحكم الأدمن (عرض اليوم) =================
-        function getOfferData() {
-            const defaults = {
-                active: true,
-                badge: 'عرض اليوم',
-                title: 'كومبو العيلة الموفر',
-                desc: '2 سندوتش شاورما دجاج كبير + بطاطس + مشروب',
-                oldPrice: '150 جنيه',
-                newPrice: '99 جنيه'
-            };
-            try {
-                const s = localStorage.getItem('restaurantOfferData');
-                return s ? Object.assign({}, defaults, JSON.parse(s)) : defaults;
-            } catch (e) {
-                return defaults;
-            }
-        }
-
+        // العرض اليومي ثابت الآن (تم إزالة لوحة الإدارة)
         function renderOfferBanner() {
-            const o = getOfferData();
-            const banner = document.getElementById('offerBanner');
-            if (!o.active || !o.title) {
-                banner.style.display = 'none';
-                return;
-            }
-            banner.style.display = '';
-            document.getElementById('offerBadgeText').textContent = o.badge;
-            document.getElementById('offerTitleText').textContent = o.title;
-            document.getElementById('offerDescText').textContent = o.desc;
-            document.getElementById('offerOldPriceText').textContent = o.oldPrice;
-            document.getElementById('offerNewPriceText').textContent = o.newPrice;
-            const btn = document.getElementById('offerAddBtn');
-            btn.onclick = function() {
-                addToCart(o.title + ' (عرض)', o.newPrice);
-            };
+            // العرض معروض دايماً بالقيم الموجودة أصلاً في الصفحة، مفيش تعديل من هنا
         }
 
-        function openAdminPanel() {
-            const pass = prompt('من فضلك ادخل كلمة مرور الإدارة:');
-            if (pass === null) return;
-            if (pass !== ADMIN_PASSWORD) {
-                alert('كلمة المرور غير صحيحة');
-                return;
-            }
-            const o = getOfferData();
-            document.getElementById('adminOfferActive').checked = o.active;
-            document.getElementById('adminOfferBadge').value = o.badge;
-            document.getElementById('adminOfferTitle').value = o.title;
-            document.getElementById('adminOfferDesc').value = o.desc;
-            document.getElementById('adminOfferOldPrice').value = o.oldPrice;
-            document.getElementById('adminOfferNewPrice').value = o.newPrice;
-            document.getElementById('adminModal').classList.add('open');
-        }
-
-        function closeAdminPanel() {
-            document.getElementById('adminModal').classList.remove('open');
-        }
-
-        document.getElementById('adminModal').addEventListener('click', function(e) {
-            if (e.target === this) closeAdminPanel();
-        });
-
-        function saveOfferFromAdmin() {
-            const data = {
-                active: document.getElementById('adminOfferActive').checked,
-                badge: document.getElementById('adminOfferBadge').value.trim() || 'عرض اليوم',
-                title: document.getElementById('adminOfferTitle').value.trim(),
-                desc: document.getElementById('adminOfferDesc').value.trim(),
-                oldPrice: document.getElementById('adminOfferOldPrice').value.trim(),
-                newPrice: document.getElementById('adminOfferNewPrice').value.trim()
-            };
-            localStorage.setItem('restaurantOfferData', JSON.stringify(data));
-            renderOfferBanner();
-            closeAdminPanel();
-            alert('تم حفظ العرض بنجاح على هذا الجهاز');
-        }
-
-        // تحميل السلة والعرض المحفوظين عند فتح الصفحة
+        // تحميل السلة عند فتح الصفحة
         document.addEventListener('DOMContentLoaded', function() {
             loadCart();
             updateCartBadge();
-            renderOfferBanner();
-            initCursorFX();
+            initPepperCursor();
             initTilt3D();
             initScrollReveal();
         });
 
-        // ================= المؤشر المضيء الخطير (Cursor FX) =================
-        function initCursorFX() {
+        // ================= المؤشر المتحرك على شكل فلفلة حمرا =================
+        function initPepperCursor() {
             const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
             if (isTouch) return;
 
-            const glow = document.getElementById('cursorGlow');
-            const dot = document.getElementById('cursorDot');
-            if (!glow || !dot) return;
+            const pepper = document.getElementById('pepperCursor');
+            if (!pepper) return;
 
             let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-            let glowX = mouseX, glowY = mouseY;
-            let dotX = mouseX, dotY = mouseY;
+            let curX = mouseX, curY = mouseY;
             let started = false;
-
-            // إنشاء ذيل المذنب: مجموعة نقاط بتتبع الماوس بتأخير متزايد وتتلاشى تدريجياً
-            const TRAIL_LENGTH = 10;
-            const trailEls = [];
-            const trailPos = [];
-            for (let i = 0; i < TRAIL_LENGTH; i++) {
-                const t = document.createElement('div');
-                t.className = 'cursor-trail';
-                document.body.appendChild(t);
-                trailEls.push(t);
-                trailPos.push({ x: mouseX, y: mouseY });
-            }
+            let wobble = 0;
 
             document.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
                 if (!started) {
                     started = true;
-                    glow.classList.add('active');
+                    pepper.classList.add('active');
                 }
             });
 
-            // تكبير المؤشر عند المرور على أي عنصر تفاعلي
+            // تكبير الفلفلة عند المرور على أي عنصر تفاعلي
             document.addEventListener('mouseover', (e) => {
                 if (e.target.closest('button, a, input, textarea, .order-btn, .category-cover')) {
-                    glow.classList.add('hovering');
+                    pepper.classList.add('hovering');
                 }
             });
             document.addEventListener('mouseout', (e) => {
                 if (e.target.closest('button, a, input, textarea, .order-btn, .category-cover')) {
-                    glow.classList.remove('hovering');
-                }
-            });
-
-            // شرارات ذهبية بتتطاير في كل الاتجاهات عند أي ضغطة ماوس
-            document.addEventListener('mousedown', (e) => {
-                const sparkCount = 10;
-                for (let i = 0; i < sparkCount; i++) {
-                    const spark = document.createElement('div');
-                    spark.className = 'click-spark';
-                    const angle = (Math.PI * 2 * i) / sparkCount + Math.random() * 0.4;
-                    const distance = 30 + Math.random() * 30;
-                    spark.style.setProperty('--sx', Math.cos(angle) * distance + 'px');
-                    spark.style.setProperty('--sy', Math.sin(angle) * distance + 'px');
-                    spark.style.left = e.clientX + 'px';
-                    spark.style.top = e.clientY + 'px';
-                    document.body.appendChild(spark);
-                    setTimeout(() => spark.remove(), 700);
+                    pepper.classList.remove('hovering');
                 }
             });
 
             function animateCursor() {
                 // حركة مرنة بتتأخر شوية عن الماوس (Lerp) عشان تحس إنها انميشن سلس
-                glowX += (mouseX - glowX) * 0.18;
-                glowY += (mouseY - glowY) * 0.18;
-                dotX += (mouseX - dotX) * 0.35;
-                dotY += (mouseY - dotY) * 0.35;
+                curX += (mouseX - curX) * 0.2;
+                curY += (mouseY - curY) * 0.2;
 
-                glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
-                dot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+                // اهتزاز بسيط بيخلي الفلفلة تتمايل يمين وشمال وهي بتتحرك، زي إنها متعلقة
+                const speed = Math.hypot(mouseX - curX, mouseY - curY);
+                wobble += 0.15 + speed * 0.01;
+                const tilt = -25 + Math.sin(wobble) * 12;
 
-                // كل نقطة في الذيل بتلحق اللي قبلها بتأخير بسيط، فبيتكون ذيل متلاحق
-                let leadX = dotX, leadY = dotY;
-                trailPos.forEach((p, i) => {
-                    p.x += (leadX - p.x) * 0.28;
-                    p.y += (leadY - p.y) * 0.28;
-                    leadX = p.x;
-                    leadY = p.y;
-                    const fade = 1 - i / TRAIL_LENGTH;
-                    const size = 6 * fade + 1;
-                    trailEls[i].style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%, -50%)`;
-                    trailEls[i].style.opacity = (fade * 0.55).toFixed(2);
-                    trailEls[i].style.width = size + 'px';
-                    trailEls[i].style.height = size + 'px';
-                });
+                pepper.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%) rotate(${tilt}deg)`;
 
                 requestAnimationFrame(animateCursor);
             }
