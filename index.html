@@ -619,82 +619,6 @@
             transform: translateY(0) scale(0.97);
         }
 
-        /* قسم عروض وكومبوهات */
-        .offer-banner {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 18px;
-            background: linear-gradient(100deg, #e07a00, #ff9d2e);
-            border-radius: 22px;
-            padding: 22px 26px;
-            margin-bottom: 30px;
-            box-shadow: 0 12px 30px rgba(224, 122, 0, 0.35);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .offer-banner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 90% 10%, rgba(255,255,255,0.25), transparent 60%);
-            pointer-events: none;
-        }
-
-        .offer-badge {
-            background: #1a1614;
-            color: #ffb703;
-            font-weight: 900;
-            font-size: 13px;
-            padding: 6px 14px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .offer-content {
-            flex: 1;
-            min-width: 200px;
-            color: #fff;
-        }
-
-        .offer-content h3 {
-            font-size: 21px;
-            font-weight: 900;
-            margin-bottom: 4px;
-        }
-
-        .offer-content p {
-            font-size: 14px;
-            color: #fff3e0;
-        }
-
-        .offer-price {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .offer-price .old-price {
-            text-decoration: line-through;
-            font-size: 13px;
-            opacity: 0.75;
-        }
-
-        .offer-price .new-price {
-            font-size: 24px;
-            font-weight: 900;
-            color: #fff;
-        }
-
-        .offer-banner .order-btn {
-            flex-shrink: 0;
-        }
 
         /* خانة البحث السريع */
         .search-wrap {
@@ -1187,11 +1111,6 @@
             .nav-links {
                 display: none;
             }
-            .offer-banner {
-                flex-direction: column;
-                text-align: center;
-                justify-content: center;
-            }
         }
     </style>
 </head>
@@ -1263,22 +1182,7 @@
         </div>
 
         <section class="menu-section-full container">
-
-            <!-- عرض اليوم / الكومبو المميز -->
-            <div class="offer-banner tilt-3d" id="offerBanner">
-                <span class="offer-badge"><i class="fa-solid fa-bolt"></i> <span id="offerBadgeText">عرض اليوم</span></span>
-                <div class="offer-content">
-                    <h3 id="offerTitleText">كومبو العيلة الموفر</h3>
-                    <p id="offerDescText">2 سندوتش شاورما دجاج كبير + بطاطس + مشروب</p>
-                </div>
-                <div class="offer-price">
-                    <span class="old-price" id="offerOldPriceText">150 جنيه</span>
-                    <span class="new-price" id="offerNewPriceText">99 جنيه</span>
-                </div>
-                <button class="order-btn" id="offerAddBtn" onclick="addToCart('كومبو العيلة الموفر (عرض اليوم)', '99 جنيه')"><i class="fa-solid fa-cart-plus"></i> أضف العرض للسلة</button>
-            </div>
-
-            <!-- خانة البحث السريع -->
+<!-- خانة البحث السريع -->
             <div class="search-wrap">
                 <input type="text" id="menuSearchInput" placeholder="دور على صنف... مثلاً: بيتزا" oninput="filterMenu(this.value)">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -2634,13 +2538,7 @@
             saveCart();
             updateCartBadge();
         }
-
-        // العرض اليومي ثابت الآن (تم إزالة لوحة الإدارة)
-        function renderOfferBanner() {
-            // العرض معروض دايماً بالقيم الموجودة أصلاً في الصفحة، مفيش تعديل من هنا
-        }
-
-        // تحميل السلة عند فتح الصفحة
+// تحميل السلة عند فتح الصفحة
         document.addEventListener('DOMContentLoaded', function() {
             loadCart();
             updateCartBadge();
